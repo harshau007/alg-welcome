@@ -74,7 +74,13 @@ const CountrySelectionScreen: React.FC<{ isDarkMode: boolean }> = ({
   };
 
   return (
-    <div className="p-4 w-[600px] h-[500px] flex flex-col">
+    <div
+      className={
+        isDarkMode
+          ? "p-4 w-[600px] bg-[#090E0E] h-[500px] flex flex-col"
+          : "p-4 w-[600px] h-[500px] flex flex-col"
+      }
+    >
       <h1 className="text-2xl mt-2 mb-4 text-center font-bold">
         Update MirrorList
       </h1>
@@ -198,8 +204,14 @@ const CountrySelectionScreen: React.FC<{ isDarkMode: boolean }> = ({
             onClick={handleUpdateMirrors}
             className={
               !selectedCountries.length
-                ? `w-[90%] bg-[#6a45d1] text-white mr-10 px-4 py-2 rounded-2xl opacity-50 cursor-not-allowed`
-                : `w-[90%] bg-[#6a45d1] text-white mr-10 px-4 py-2 rounded-2xl hover:bg-[#7c53ed]`
+                ? `w-[90%] ${
+                    isDarkMode ? "bg-gray-700" : "bg-gray-300"
+                  } mr-10 px-4 py-2 rounded-2xl opacity-50 cursor-not-allowed`
+                : `w-[90%] ${
+                    isDarkMode
+                      ? "bg-gray-700 hover:bg-gray-600"
+                      : "bg-gray-300 hover:bg-gray-400"
+                  } mr-10 px-4 py-2 rounded-2xl`
             }
             disabled={!selectedCountries.length || loading}
           >
