@@ -117,22 +117,49 @@ func (a *App) CurrentTheme() string {
 	return currThemeName
 }
 
+/*
+kwriteconfig6 --file ~/.config/kwinrc --group org.kde.kdecoration2 --key theme "__aurorae__svg__Qogir-light"
+
+kwriteconfig6 --file ~/.config/kwinrc --group org.kde.kdecoration2 --key theme "__aurorae__svg__Qogir-circle-dark"
+
+qdbus6 org.kde.KWin /KWin reconfigure
+*/
+
 func (a *App) ToggleTheme(dark bool) {
 	var style string
+	var winDeco string
 	switch desktopEnv {
 	case "kde":
-		if dark {
-			// style = "org.kde.breezedark.desktop"
-			style = "Qogirdark"
+		isPure := getLookAndFeelPackageKDE()
+		if strings.Contains(isPure, "org.kde.breeze") {
+			if dark {
+				style = "org.kde.breezedark.desktop"
+			} else {
+				style = "org.kde.breeze.desktop"
+			}
+			cmd := exec.Command("lookandfeeltool", "--apply", style)
+
+			_, err := cmd.Output()
+			if err != nil {
+				fmt.Println("failed to change KDE theme:", err)
+			}
 		} else {
-			// style = "org.kde.breeze.desktop"
-			style = "Qogirlight"
-		}
-		// cmd := exec.Command("lookandfeeltool", "--apply", style)
-		cmd := exec.Command("plasma-apply-colorscheme", style)
-		_, err := cmd.Output()
-		if err != nil {
-			fmt.Println("failed to change KDE theme:", err)
+			if dark {
+				// style = "org.kde.breezedark.desktop"
+				style = "Qogirdark"
+				winDeco = "__aurorae__svg__Qogir-circle-dark"
+			} else {
+				// style = "org.kde.breeze.desktop"
+				style = "Qogirlight"
+				winDeco = "__aurorae__svg__Qogir-light"
+			}
+			// cmd := exec.Command("lookandfeeltool", "--apply", style)
+			cmd := exec.Command("plasma-apply-colorscheme", style, "&&", "kwriteconfig6", "--file", "~/.config/kwinrc", "--group", "org.kde.kdecoration2", "--key", "theme", winDeco, "&&", "qdbus6", "org.kde.KWin", "/KWin", "reconfigure")
+
+			_, err := cmd.Output()
+			if err != nil {
+				fmt.Println("failed to change KDE theme:", err)
+			}
 		}
 	case "gnome":
 		if dark {
