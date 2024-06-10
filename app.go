@@ -145,7 +145,7 @@ func (a *App) ToggleTheme(dark bool) {
 		} else {
 			if dark {
 				style = "Qogirdark"
-				winDeco = "__aurorae__svg__Qogir-circle-dark"
+				winDeco = "__aurorae__svg__Qogir-dark-circle"
 			} else {
 				style = "Qogirlight"
 				winDeco = "__aurorae__svg__Qogir-light"
