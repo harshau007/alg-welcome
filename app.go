@@ -153,7 +153,7 @@ func (a *App) ToggleTheme(dark bool) {
 				style = "Qogirlight"
 				winDeco = "__aurorae__svg__Qogir-light"
 			}
-			command := "plasma-apply-colorscheme " + style + " && kwriteconfig6 --file ~/.config/kwinrc --group org.kde.kdecoration2 --key theme " + winDeco + " && qdbus6 org.kde.KWin /KWin reconfigure"
+			command := "plasma-apply-colorscheme " + style + " && kwriteconfig6 --file $HOME/.config/kwinrc --group org.kde.kdecoration2 --key theme " + winDeco + " && qdbus6 org.kde.KWin /KWin reconfigure"
 			fmt.Println(command)
 			cmd := exec.Command(command)
 
