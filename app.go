@@ -79,6 +79,7 @@ func getLookAndFeelPackageKDE() string {
 	for scanner.Scan() {
 		line := scanner.Text()
 		if strings.HasPrefix(line, "LookAndFeelPackage=") {
+			fmt.Println(strings.TrimPrefix(line, "LookAndFeelPackage="))
 			return strings.TrimPrefix(line, "LookAndFeelPackage=")
 		}
 	}
@@ -121,11 +122,14 @@ func (a *App) ToggleTheme(dark bool) {
 	switch desktopEnv {
 	case "kde":
 		if dark {
-			style = "org.kde.breezedark.desktop"
+			// style = "org.kde.breezedark.desktop"
+			style = "Qogirdark"
 		} else {
-			style = "org.kde.breeze.desktop"
+			// style = "org.kde.breeze.desktop"
+			style = "Qogirlight"
 		}
-		cmd := exec.Command("lookandfeeltool", "--apply", style)
+		// cmd := exec.Command("lookandfeeltool", "--apply", style)
+		cmd := exec.Command("plasma-apply-colorscheme", style)
 		_, err := cmd.Output()
 		if err != nil {
 			fmt.Println("failed to change KDE theme:", err)

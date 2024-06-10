@@ -20,7 +20,6 @@ const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
   const [isNavigated, setIsNavigated] = useState<boolean>(false);
   const [isAutoStart, setIsAutoStart] = useState<boolean>(false);
-  const [isSomething, setIsSomething] = useState<boolean>(false);
   const [showLogger, setShowLogger] = useState<boolean>(false);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const App: React.FC = () => {
         setIsDarkMode(
           currTheme === "Adwaita-dark" ||
             currTheme === "prefer-dark" ||
-            currTheme === "org.kde.breezedark.desktop"
+            currTheme === "com.github.vinceliuice.Qogir-dark"
         );
       } catch (error) {
         console.error("Failed to fetch current theme:", error);
