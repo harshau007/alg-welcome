@@ -102,7 +102,7 @@ const WelcomeScreen: React.FC<ScreenProps> = ({
             {isInstalled ? (
               <button
                 onClick={handleInstallALG}
-                className={`block w-full py-2 px-4 mb-2 rounded-lg ${
+                className={`block w-full py-2 px-4 mb-2 font-bold rounded-lg ${
                   isDarkMode
                     ? "bg-gray-700 hover:bg-gray-600"
                     : "bg-gray-300 hover:bg-gray-400"

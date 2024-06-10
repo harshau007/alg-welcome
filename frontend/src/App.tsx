@@ -21,6 +21,12 @@ const App: React.FC = () => {
   const [isNavigated, setIsNavigated] = useState<boolean>(false);
   const [isAutoStart, setIsAutoStart] = useState<boolean>(false);
   const [showLogger, setShowLogger] = useState<boolean>(false);
+  const Themes = [
+    "Adwaita-dark",
+    "prefer-dark",
+    "org.kde.breezedark.desktop",
+    "com.github.vinceliuice.Qogir-dark",
+  ];
 
   useEffect(() => {
     const fetchTheme = async () => {
@@ -28,11 +34,7 @@ const App: React.FC = () => {
         const currTheme = await CurrentTheme();
         const fileExist = await CheckFileExists();
         setIsAutoStart(fileExist);
-        setIsDarkMode(
-          currTheme === "Adwaita-dark" ||
-            currTheme === "prefer-dark" ||
-            currTheme === "com.github.vinceliuice.Qogir-dark"
-        );
+        setIsDarkMode(Themes.includes(currTheme));
       } catch (error) {
         console.error("Failed to fetch current theme:", error);
       }
