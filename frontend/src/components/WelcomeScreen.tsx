@@ -9,8 +9,9 @@ import {
   URL,
 } from "../../wailsjs/go/main/App";
 import "../globals.css";
-import moon from "../assets/moon.png";
-import sun from "../assets/sun.png";
+import extDark from "../assets/ext-dark.png";
+import extLight from "../assets/ext-light.png";
+import { Image } from "lucide-react";
 
 interface ScreenProps {
   goToScreen: (index: number) => void;
@@ -79,7 +80,7 @@ const WelcomeScreen: React.FC<ScreenProps> = ({
 
   return (
     <div
-      className={`flex flex-col h-full p-6 ${
+      className={`flex flex-col h-full p-6 ml-3 mr-3 ${
         isDarkMode ? "bg-[#090E0E] text-white" : "bg-gray-100 text-gray-800"
       }`}
     >
@@ -95,13 +96,13 @@ const WelcomeScreen: React.FC<ScreenProps> = ({
       </div>
 
       <div className="flex-grow space-y-6">
-        <div className="flex space-x-4">
+        <div className="flex space-x-10">
           <div className="flex-1">
             <h2 className="text-lg font-semibold mb-2">Install & Setup</h2>
             {isInstalled ? (
               <button
                 onClick={handleInstallALG}
-                className={`block w-full py-2 px-4 mb-2 rounded-2xl ${
+                className={`block w-full py-2 px-4 mb-2 rounded-lg ${
                   isDarkMode
                     ? "bg-gray-700 hover:bg-gray-600"
                     : "bg-gray-300 hover:bg-gray-400"
@@ -112,18 +113,25 @@ const WelcomeScreen: React.FC<ScreenProps> = ({
             ) : (
               <button
                 onClick={() => URL("https://arkalinuxgui.vercel.app/tutorials")}
-                className={`block w-full py-2 px-4 mb-2 rounded-2xl ${
+                className={`flex w-full py-2 px-4 mb-2 rounded-lg ${
                   isDarkMode
                     ? "bg-gray-700 hover:bg-gray-600"
                     : "bg-gray-300 hover:bg-gray-400"
                 }`}
               >
-                Tutorials
+                <div className="flex flex-grow gap-2 font-bold ml-[3.5rem]">
+                  Tutorials
+                  <img
+                    src={isDarkMode ? extDark : extLight}
+                    alt="External Link"
+                    className="w-5 h-5 mt-[0.2rem]"
+                  />
+                </div>
               </button>
             )}
             <button
               onClick={handleScreenResolution}
-              className={`block w-full py-2 px-4 rounded-2xl ${
+              className={`block w-full py-2 px-4 font-bold rounded-lg ${
                 isDarkMode
                   ? "bg-gray-700 hover:bg-gray-600"
                   : "bg-gray-300 hover:bg-gray-400"
@@ -134,11 +142,11 @@ const WelcomeScreen: React.FC<ScreenProps> = ({
           </div>
 
           <div className="flex-1">
-            <h2 className="text-lg font-semibold mb-2">Basic Utilities</h2>
+            <h2 className="text-lg font-semibold mb-2 mr-2">Basic Utilities</h2>
             <button
               onClick={handleUpdateSystem}
               disabled={loading}
-              className={`block w-full py-2 px-4 mb-2 rounded-2xl ${
+              className={`block w-full py-2 px-4 mb-2  font-bold rounded-lg ${
                 loading
                   ? "opacity-50 cursor-not-allowed"
                   : isDarkMode
@@ -152,7 +160,7 @@ const WelcomeScreen: React.FC<ScreenProps> = ({
               onClick={() => {
                 goToScreen(1);
               }}
-              className={`block w-full py-2 px-4 rounded-2xl ${
+              className={`block w-full py-2 px-4 font-bold rounded-lg ${
                 isDarkMode
                   ? "bg-gray-700 hover:bg-gray-600"
                   : "bg-gray-300 hover:bg-gray-400"
@@ -163,38 +171,42 @@ const WelcomeScreen: React.FC<ScreenProps> = ({
           </div>
         </div>
 
-        <div>
+        <div className="flex-grow flex-col">
           <h2 className="text-lg font-semibold mb-2">Social Media Links</h2>
-          <div className="flex space-x-4">
+          <div className="flex space-x-10">
             <button
               onClick={() => URL("https://github.com/arch-linux-gui")}
-              className={`flex-1 py-2 px-4 rounded-2xl ${
+              className={`flex-1 py-2 px-4 font-bold rounded-lg ${
                 isDarkMode
                   ? "bg-gray-700 hover:bg-gray-600"
                   : "bg-gray-300 hover:bg-gray-400"
               }`}
             >
-              GitHub
+              <div className="flex flex-grow gap-2 ml-[4rem]">
+                GitHub
+                <img
+                  src={isDarkMode ? extDark : extLight}
+                  alt="External Link"
+                  className="w-5 h-5 mt-[0.2rem]"
+                />
+              </div>
             </button>
             <button
               onClick={() => URL("https://discord.gg/NgAFEw9Tkf")}
-              className={`flex-1 py-2 px-4 rounded-2xl ${
+              className={`flex-1 py-2 px-4 font-bold rounded-lg ${
                 isDarkMode
                   ? "bg-gray-700 hover:bg-gray-600"
                   : "bg-gray-300 hover:bg-gray-400"
               }`}
             >
-              Discord
-            </button>
-            <button
-              onClick={() => URL("https://x.com/arkalinuxgui")}
-              className={`flex-1 py-2 px-4 rounded-2xl ${
-                isDarkMode
-                  ? "bg-gray-700 hover:bg-gray-600"
-                  : "bg-gray-300 hover:bg-gray-400"
-              }`}
-            >
-              X (formerly twitter)
+              <div className="flex flex-grow gap-2 ml-[4rem]">
+                Discord
+                <img
+                  src={isDarkMode ? extDark : extLight}
+                  alt="External Link"
+                  className="w-5 h-5 mt-[0.2rem]"
+                />
+              </div>
             </button>
           </div>
         </div>
@@ -240,7 +252,7 @@ const WelcomeScreen: React.FC<ScreenProps> = ({
           onClick={() => {
             goToScreen(2);
           }}
-          className={`block w-full py-2 px-4 mt-4 rounded-2xl ${
+          className={`block w-full py-2 px-4 mt-4 font-bold rounded-lg ${
             isDarkMode
               ? "bg-gray-700 hover:bg-gray-600"
               : "bg-gray-300 hover:bg-gray-400"

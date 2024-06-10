@@ -3,15 +3,16 @@ import { MirrorList } from "../../wailsjs/go/main/App";
 import { EventsOn } from "../../wailsjs/runtime";
 import { useLogsContext } from "@/lib/LogsContext";
 
-const CountrySelectionScreen: React.FC<{ isDarkMode: boolean }> = ({
-  isDarkMode,
-}) => {
+const CountrySelectionScreen: React.FC<{
+  isDarkMode: boolean;
+  setShowLogger: (log: boolean) => void;
+}> = ({ isDarkMode, setShowLogger }) => {
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [includeHttps, setIncludeHttps] = useState<boolean>(true);
   const [includeHttp, setIncludeHttp] = useState<boolean>(false);
   const [sortBy, setSortBy] = useState<string>("age");
   const [maxMirrors, setMaxMirrors] = useState<number>(20);
-  const [timeout, setTimeout] = useState<number>(10);
+  const [timeout, setTimeout] = useState<number>(30);
   const { addLog, clearLogs, loading, setLoading } = useLogsContext();
 
   useEffect(() => {
@@ -58,11 +59,13 @@ const CountrySelectionScreen: React.FC<{ isDarkMode: boolean }> = ({
     setLoading(true);
 
     try {
+      setShowLogger(true);
       await MirrorList(command);
     } catch (error) {
       console.error("Error updating mirrors:", error);
     } finally {
       setLoading(false);
+      setShowLogger(false);
       setSelectedCountries([]);
       setIncludeHttps(true);
       setIncludeHttp(false);

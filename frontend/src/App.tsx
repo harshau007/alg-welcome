@@ -70,6 +70,10 @@ const App: React.FC = () => {
     setShowLogger(false);
   };
 
+  const setterLogger = (log: boolean) => {
+    setShowLogger(log);
+  };
+
   const screens: JSX.Element[] = [
     <WelcomeScreen
       goToScreen={goToScreen}
@@ -78,7 +82,10 @@ const App: React.FC = () => {
       isAutoStart={isAutoStart}
       toggleAutoStart={toggleAutoStart}
     />,
-    <CountrySelectionScreen isDarkMode={isDarkMode} />,
+    <CountrySelectionScreen
+      isDarkMode={isDarkMode}
+      setShowLogger={setterLogger}
+    />,
     <AboutUs />,
   ];
 
