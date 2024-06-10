@@ -14,9 +14,9 @@ sha256sums=('c69bf0c41555d1c31fca41aacef9082d7496864703b478ffc29bd92c672cb5f0')
 package() {
   tar -xf "$srcdir/"${pkgname}".tar.gz" -C "$pkgdir/"
 
-  install -Dm644 "$srcdir/"${pkgname}"/build/bin/alg-logo.png" "$pkgdir/usr/share/pixmaps/alg-logo.png"
+  install -Dm644 "$srcdir/"${pkgname}"/build/bin/welcome.png" "$pkgdir/usr/share/pixmaps/welcome.png"
 
-  install -Dm755 "$srcdir/"${pkgname}"/build/bin/alg-welcome.desktop" "$pkgdir/usr/share/applications/alg-welcome.desktop"
+  install -Dm755 "$srcdir/"${pkgname}"/build/bin/welcome.desktop" "$pkgdir/usr/share/applications/welcome.desktop"
 
   install -Dm755 "$srcdir/"${pkgname}"/build/bin/welcome" "$pkgdir/usr/bin/welcome"
 }
